@@ -1,4 +1,3 @@
-require('dotenv').config({ path: '../.env' }); // Load .env from parent directory
 const express = require('express');
 const cors = require('cors');
 const { handleUserInput } = require('./src/bot_logic'); // Import the bot logic
