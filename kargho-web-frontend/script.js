@@ -121,3 +121,5 @@ window.addEventListener('load', () => {
     // A small delay to ensure displayStartupReport has rendered
     setTimeout(() => sendMessage(''), 100); // Send empty message to trigger initial bot response
 });
+
+// Trivial change to force Git update - please remove this comment after successful deployment.
