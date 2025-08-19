@@ -1,10 +1,13 @@
 const chatOutput = document.getElementById('chat-output');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
-const clearButton = document.getElementById('clear-button'); // ADDED THIS LINE
+const clearButton = document.getElementById('clear-button');
 
-// IMPORTANT: Replace with your deployed backend URL
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
+// IMPORTANT: For local file system access, process.env is not available.
+// We'll use a conditional check to determine the environment.
+const BACKEND_URL = (window.location.protocol === 'file:')
+    ? 'http://localhost:3000' // Local development when opened via file://
+    : process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000'; // Vercel or other web server
 
 let sessionId = localStorage.getItem('karghoSessionId');
 if (!sessionId) {
