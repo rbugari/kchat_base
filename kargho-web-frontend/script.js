@@ -3,11 +3,23 @@ const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 const clearButton = document.getElementById('clear-button');
 
-// IMPORTANT: For local file system access, process.env is not available.
-// We'll use a conditional check to determine the environment.
+// Read backend URL from the script tag in index.html
+const backendUrlDataElement = document.getElementById('backend-url-data');
+let backendUrlData = null;
+if (backendUrlDataElement) {
+    try {
+        backendUrlData = JSON.parse(backendUrlDataElement.textContent);
+    } catch (e) {
+        console.error("Error parsing backend-url-data:", e);
+    }
+}
+
 const BACKEND_URL = (window.location.protocol === 'file:')
     ? 'http://localhost:3000' // Local development when opened via file://
-    : process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000'; // Vercel or other web server
+    : (backendUrlData && backendUrlData.url) || 'http://localhost:3000'; // Vercel or other web server
+
+console.log("DEBUG: BACKEND_URL determined as:", BACKEND_URL); // DEBUG LOG
+console.log("DEBUG: backendUrlDataElement content:", backendUrlDataElement ? backendUrlDataElement.textContent : "Element not found"); // DEBUG LOG
 
 let sessionId = localStorage.getItem('karghoSessionId');
 if (!sessionId) {
@@ -53,7 +65,8 @@ async function sendMessage(initialMessage = null) {
     } catch (error) {
         console.error('Error sending message:', error);
         appendMessage('bot', 'Bot: Error al conectar con el servidor. Intenta de nuevo más tarde.');
-    } finally {
+    }
+} finally {
         userInput.disabled = false;
         sendButton.disabled = false;
         userInput.focus();
@@ -87,7 +100,7 @@ async function displayStartupReport() {
             <div class="startup-report">
                 <p><strong>Bot Kargho Iniciado</strong></p>
                 <p>Idioma: ${status.language.toUpperCase()} | Proveedor LLM: ${status.llmProvider} | Modelo LLM: ${status.llmModel} | Modo API: ${status.apiMode}</p>
-                <p><strong>Agentes Disponibles:</strong></p>
+                p><strong>Agentes Disponibles:</strong></p>
                 <ul>
         `;
 
