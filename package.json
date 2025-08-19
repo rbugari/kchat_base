@@ -1,0 +1,19 @@
+{
+  "name": "karghochat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "kargho_cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node kargho_cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "groq-sdk": "^0.30.0",
+    "openai": "^4.47.1"
+  }
+}
