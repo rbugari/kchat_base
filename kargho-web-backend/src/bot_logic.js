@@ -1,6 +1,6 @@
-const { getLLMResponse } = require('../../llm'); // Adjusted path
-const { getPromptByAgent } = require('../../prompts'); // Adjusted path
-const tools = require('../../tools'); // Adjusted path
+const { getLLMResponse } = require('../llm'); // Adjusted path
+const { getPromptByAgent } = require('../prompts'); // Adjusted path
+const tools = require('../tools'); // Adjusted path
 const { colors } = require('./startup_report'); // Import colors from new module
 
 // --- Helper Functions ---
