@@ -1,9 +1,10 @@
 const chatOutput = document.getElementById('chat-output');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
+const clearButton = document.getElementById('clear-button'); // ADDED THIS LINE
 
 // IMPORTANT: Replace with your deployed backend URL
-const BACKEND_URL = 'http://localhost:3000'; // For local testing
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
 
 let sessionId = localStorage.getItem('karghoSessionId');
 if (!sessionId) {
@@ -19,11 +20,11 @@ function appendMessage(sender, message) {
     chatOutput.scrollTop = chatOutput.scrollHeight; // Scroll to bottom
 }
 
-async function sendMessage(initialMessage = null) { // Added initialMessage parameter
-    const message = initialMessage !== null ? initialMessage : userInput.value.trim(); // Use initialMessage if provided
-    if (message === '' && initialMessage === null) return; // Only return if no message and not an initial call
+async function sendMessage(initialMessage = null) {
+    const message = initialMessage !== null ? initialMessage : userInput.value.trim();
+    if (message === '' && initialMessage === null) return;
 
-    if (initialMessage === null) { // Only append user message if it's not an initial call
+    if (initialMessage === null) {
         appendMessage('user', `Tu: ${message}`);
         userInput.value = '';
     }
@@ -56,11 +57,18 @@ async function sendMessage(initialMessage = null) { // Added initialMessage para
     }
 }
 
-sendButton.addEventListener('click', () => sendMessage()); // Call without initialMessage
+sendButton.addEventListener('click', () => sendMessage());
 userInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
-        sendMessage(); // Call without initialMessage
+        sendMessage();
     }
+});
+
+// ADDED EVENT LISTENER FOR CLEAR BUTTON
+clearButton.addEventListener('click', () => {
+    localStorage.removeItem('karghoSessionId'); // Clear session ID
+    chatOutput.innerHTML = ''; // Clear chat display
+    location.reload(); // Reload the page to start fresh
 });
 
 // Function to fetch and display startup report
