@@ -118,12 +118,3 @@ h1 {
 .startup-report li {
     margin-bottom: 2px;
 }
-
-/* Style for the new clear button */
-#clear-button {
-    background-color: #e06c75; /* Reddish color */
-}
-
-#clear-button:hover {
-    background-color: #c25a63;
-}
