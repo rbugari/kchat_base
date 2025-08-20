@@ -65,8 +65,7 @@ async function sendMessage(initialMessage = null) {
     } catch (error) {
         console.error('Error sending message:', error);
         appendMessage('bot', 'Bot: Error al conectar con el servidor. Intenta de nuevo más tarde.');
-    }
-} finally {
+    } finally { // <--- This is where the missing '}' was
         userInput.disabled = false;
         sendButton.disabled = false;
         userInput.focus();
@@ -100,7 +99,7 @@ async function displayStartupReport() {
             <div class="startup-report">
                 <p><strong>Bot Kargho Iniciado</strong></p>
                 <p>Idioma: ${status.language.toUpperCase()} | Proveedor LLM: ${status.llmProvider} | Modelo LLM: ${status.llmModel} | Modo API: ${status.apiMode}</p>
-                p><strong>Agentes Disponibles:</strong></p>
+                <p><strong>Agentes Disponibles:</strong></p>
                 <ul>
         `;
 
@@ -122,7 +121,7 @@ async function displayStartupReport() {
         appendMessage('bot', reportHtml);
     } catch (error) {
         console.error('Error fetching startup report:', error);
-        appendMessage('bot', 'Bot: Error al cargar el informe de inicio.');
+        appendMessage('bot', 'Bot: Error al conectar con el servidor. Intenta de nuevo más tarde.');
     }
 }
 

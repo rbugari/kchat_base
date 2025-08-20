@@ -39,11 +39,16 @@ El proyecto ha alcanzado un estado robusto y funcional, incorporando las siguien
     *   **Mensajes de Éxito Precisos:** Se ha corregido la interpretación del resultado de la herramienta `registerCarrier` para que el bot informe correctamente el éxito del registro en lugar de un error.
     *   **Estabilidad Mejorada:** Se ha resuelto un problema de bucle en la lógica de handoff, asegurando un flujo de conversación estable.
 
+*   **Despliegue Completo (Nuevo):**
+    *   **Backend en Railway:** El backend de la aplicación (`kargho-web-backend`) ha sido desplegado exitosamente en Railway.
+    *   **Frontend en Vercel:** La interfaz de usuario web (`kargho-web-frontend`) ha sido desplegada exitosamente en Vercel y se comunica correctamente con el backend en Railway.
+
 ## 3) Arquitectura y Componentes Clave
 
 *   **`kargho_cli.js`:** Interfaz de línea de comandos principal, gestiona el estado de la sesión, el historial de conversación y la interacción con el LLM y las herramientas.
 *   **`llm.js`:** Módulo de abstracción para la comunicación con los proveedores de LLM (Groq, OpenAI).
 *   **`prompts.js`:** Ahora actúa como un cargador dinámico de prompts, leyendo el contenido de los archivos `.md` según el idioma y el agente activo.
+
 *   **`tools.js`:** Implementa las funciones para interactuar con las APIs externas de Kargho, incluyendo un sistema de mocking configurable.
 *   **`.env`:** Archivo para la configuración de variables sensibles y de entorno (ej. `LLM_PROVIDER`, `LLM_MODEL`, `MOCK_API`).
 *   **`kargho-web-backend/`:** Servidor Express que expone una API `/chat` para la interacción del frontend y `/status` para el informe de inicio. Contiene la lógica central del bot (`bot_logic.js`).

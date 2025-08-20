@@ -43,6 +43,8 @@ The Kargho Chatbot is a multi-agent conversational AI system designed to assist 
 
 *   Node.js (LTS recommended)
 *   npm (Node Package Manager)
+*   Git (para CI/CD automático)
+*   Cuentas en Railway y Vercel (para despliegue)
 
 ### Installation
 
