@@ -87,8 +87,34 @@ app.get('/', (req, res) => {
     res.send('Kargho Chatbot Backend is running!');
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Kargho Chatbot Backend listening on port ${PORT}`);
     console.log("DEBUG: index.js - Server started and listening."); // DEBUG LOG
     console.log("DEBUG: index.js - Script finished execution."); // DEBUG LOG
+});
+
+// Handle graceful shutdown
+process.on('SIGTERM', () => {
+    console.log('DEBUG: index.js - SIGTERM received, shutting down gracefully');
+    server.close(() => {
+        console.log('DEBUG: index.js - Server closed');
+        process.exit(0);
+    });
+});
+
+process.on('SIGINT', () => {
+    console.log('DEBUG: index.js - SIGINT received, shutting down gracefully');
+    server.close(() => {
+        console.log('DEBUG: index.js - Server closed');
+        process.exit(0);
+    });
+});
+
+// Keep the process alive
+process.on('uncaughtException', (err) => {
+    console.error('DEBUG: index.js - Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('DEBUG: index.js - Unhandled Rejection at:', promise, 'reason:', reason);
 });
