@@ -90,6 +90,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Kargho Chatbot Backend listening on port ${PORT}`);
     console.log("DEBUG: index.js - Server started and listening."); // DEBUG LOG
+    console.log("DEBUG: index.js - Script finished execution."); // DEBUG LOG
 });
-
-console.log("DEBUG: index.js - Script finished execution."); // DEBUG LOG
